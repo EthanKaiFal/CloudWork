@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
-export function Navbar() {
+export function NavBar() {
   const accessToken = localStorage.getItem('accessToken');
   const user = localStorage.getItem('username');
   const [name, setName] = useState( null); // Initialize userData as null
