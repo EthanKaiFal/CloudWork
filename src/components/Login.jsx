@@ -81,7 +81,6 @@ const handleSaveBike = (event) => {
 
   //push to backend after 
 }
-event.preventDefault();
   useEffect(() => {
     fetchUserProfile();
   }, []);
