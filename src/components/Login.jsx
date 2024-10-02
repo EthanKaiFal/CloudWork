@@ -23,10 +23,65 @@ const client = generateClient({
   authMode: "userPool",
 });
 
+
 export default function Login() {
   const [userprofiles, setUserProfiles] = useState([]);
   const { signOut } = useAuthenticator((context) => [context.user]);
+  //profile info inputs
+  const [yearsRiding, setYearsRiding] = useState(0);
+  const [bikeName, setBikeName] = useState('');
+  const [bikeSold, setBikeSold] = useState(false);
+  const [bikeScore, setBikeScore] = useState(0.0);
+  const [bikeBroken, setBikeBroken] = useState(false);
+  const [monthsOwned, setMonthsOwned] = useState(0);
 
+
+  //inputChangeHandlers
+  const handleyearsRiding = (event) => {
+    setYearsRiding(event.target.value);
+  };
+  const handleBikeName = (event) => {
+    setBikeName(event.target.value);
+  };
+  const handleBikeSold = (event) => {
+    if(event.target.value.equals("Yes")){
+    setBikeSold(true);
+    }
+    else{
+      setBikeSold(false);
+    }
+  };
+  const handleBikeScore = (event) => {
+    const value = parseFloat(event.target.value);
+    setBikeScore(value);
+  };
+  const handleBikeBroken = (event) => {
+    if(event.target.value.equals("Yes")){
+    setBikeBroken(true);
+    }
+    else{
+      setBikeBroken(false);
+    }
+  };
+  const handleMonthsOwned = (event) => {
+    const value = parseInt(event.target.value,10);
+    setMonthsOwned(value);
+
+  }
+
+
+//save button handler after a bike is added
+const handleSaveBike = (event) => {
+  event.preventDefault();
+  alert('Bike Name: ${bikeName}');
+  alert('Bike Sold: ${bikeSold}');
+  alert('Bike Score: ${bikeScore}');
+  alert('Bike Broken: ${bikeBroken}');
+  alert('Bike Months Owned: ${monthsOwned}');
+
+  //push to backend after 
+}
+event.preventDefault();
   useEffect(() => {
     fetchUserProfile();
   }, []);
