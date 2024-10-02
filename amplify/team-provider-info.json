@@ -14,7 +14,11 @@
     "categories": {
       "auth": {
         "cloudwork8423941784239417": {},
-        "cloudwork7f06f338": {}
+        "cloudwork7f06f338": {},
+        "userPoolGroups": {}
+      },
+      "api": {
+        "cloudwork": {}
       }
     }
   }
