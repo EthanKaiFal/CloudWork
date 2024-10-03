@@ -19,6 +19,7 @@ type Bike @model {
   sold: Boolean
   broken: Boolean
   ownershipMonths: Int
+  score: Int
   userId: ID! @index(name: "byUserProfile") # Foreign key linking the bike to a user
   owner: UserProfile @belongsTo(fields: ["userId"])
 }

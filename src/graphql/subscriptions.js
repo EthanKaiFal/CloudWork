@@ -59,12 +59,14 @@ export const onCreateBike = /* GraphQL */ `
   subscription OnCreateBike($filter: ModelSubscriptionBikeFilterInput) {
     onCreateBike(filter: $filter) {
       bikeId
+      bikeNumber
       brand
       model
       year
       sold
       broken
       ownershipMonths
+      score
       userId
       owner {
         userId
@@ -84,12 +86,14 @@ export const onUpdateBike = /* GraphQL */ `
   subscription OnUpdateBike($filter: ModelSubscriptionBikeFilterInput) {
     onUpdateBike(filter: $filter) {
       bikeId
+      bikeNumber
       brand
       model
       year
       sold
       broken
       ownershipMonths
+      score
       userId
       owner {
         userId
@@ -109,12 +113,14 @@ export const onDeleteBike = /* GraphQL */ `
   subscription OnDeleteBike($filter: ModelSubscriptionBikeFilterInput) {
     onDeleteBike(filter: $filter) {
       bikeId
+      bikeNumber
       brand
       model
       year
       sold
       broken
       ownershipMonths
+      score
       userId
       owner {
         userId

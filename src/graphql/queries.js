@@ -49,12 +49,14 @@ export const getBike = /* GraphQL */ `
   query GetBike($bikeId: ID!) {
     getBike(bikeId: $bikeId) {
       bikeId
+      bikeNumber
       brand
       model
       year
       sold
       broken
       ownershipMonths
+      score
       userId
       owner {
         userId
@@ -87,12 +89,14 @@ export const listBikes = /* GraphQL */ `
     ) {
       items {
         bikeId
+        bikeNumber
         brand
         model
         year
         sold
         broken
         ownershipMonths
+        score
         userId
         createdAt
         updatedAt
@@ -148,12 +152,14 @@ export const bikesByUserId = /* GraphQL */ `
     ) {
       items {
         bikeId
+        bikeNumber
         brand
         model
         year
         sold
         broken
         ownershipMonths
+        score
         userId
         createdAt
         updatedAt

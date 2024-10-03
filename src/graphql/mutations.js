@@ -65,12 +65,14 @@ export const createBike = /* GraphQL */ `
   ) {
     createBike(input: $input, condition: $condition) {
       bikeId
+      bikeNumber
       brand
       model
       year
       sold
       broken
       ownershipMonths
+      score
       userId
       owner {
         userId
@@ -93,12 +95,14 @@ export const updateBike = /* GraphQL */ `
   ) {
     updateBike(input: $input, condition: $condition) {
       bikeId
+      bikeNumber
       brand
       model
       year
       sold
       broken
       ownershipMonths
+      score
       userId
       owner {
         userId
@@ -121,12 +125,14 @@ export const deleteBike = /* GraphQL */ `
   ) {
     deleteBike(input: $input, condition: $condition) {
       bikeId
+      bikeNumber
       brand
       model
       year
       sold
       broken
       ownershipMonths
+      score
       userId
       owner {
         userId
