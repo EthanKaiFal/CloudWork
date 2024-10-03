@@ -12,6 +12,7 @@ type UserProfile @model {
 
 type Bike @model {
   bikeId: ID! @primaryKey
+  bikeNumber: Int!
   brand: String!
   model: String!
   year: Int

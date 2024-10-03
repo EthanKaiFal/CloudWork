@@ -37,6 +37,8 @@ export default function Login() {
   const [bikeScore, setBikeScore] = useState(0.0);
   const [bikeBroken, setBikeBroken] = useState(false);
   const [monthsOwned, setMonthsOwned] = useState(0);
+  //frontend status variable 
+  const [addingNewBike, setaddingPage] = useState(false);
 
 
   //inputChangeHandlers
@@ -97,12 +99,18 @@ const handleSaveBike = (event) => {
     try {
     const bikesData = await API.graphql(graphqlOperation(listBikes));
     console.log(bikesData);
-    setUserBikes(bikesData);
+    //sort by the bike number ascending so that we get the order in which owned
+    const sortedBikes = bikesData.sort((a, b) => a.bikeNumber = b.bikenumber);
+    setUserBikes(sortedBikes);
     }
     catch (err) {
       console.error('Error fetching bikes', err);
     }
   };
+
+  const handleRemove = (bikeId) => {
+    //do a call her that will remove the bike from the list of bikes owned by the owner
+  }
 
   const displayUserBikes = () => {
     //we want to first fetch all the bikes 
@@ -111,7 +119,17 @@ const handleSaveBike = (event) => {
     <View>
       {userBikes.map((userBike) => (
         <View>
+          <View>
+            <Text>Bike Number: {userBike.bikeNumber}</Text>
+            <Text>Brand:{userBike.brand}</Text>
+            <Text>Model:{userBike.model}</Text>
+            <Text>Year:{userBike.year}</Text>
+            {userBike.broken ? <Text>Broken: Yes</Text> : <Text>Broken: No</Text>}
+            {userBike.sold ? <Text>Sold: Yes</Text> : <Text>Sold: No</Text>}
+            <Text>Months Owned: {userBike.ownershipMonths}</Text>
           </View>
+          <Button onClick={() =>handleRemove(userBike.bikeId)}> Remove </Button>
+        </View>
       ))}
     </View>
   )
@@ -152,7 +170,12 @@ const handleSaveBike = (event) => {
             <View>
               <Heading level="3">{userprofile.email}</Heading>
               {/* get the bikes listed and rdy to be added */}
-
+              <View>
+                {displayUserBikes()}
+              </View>
+              <View>
+                {addingNewBike ? displayNewBikeInputForm() : <Button onClick={handleAddBike}>Add Bike</Button>}
+              </View>
             </View>
           </Flex>
         ))}
