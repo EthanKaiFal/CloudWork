@@ -12,6 +12,7 @@ import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import { generateClient } from "aws-amplify/data";
 import outputs from "../../amplify_outputs.json";
+import { bikesByUserId } from "../graphql/queries";
 
 
 /**
@@ -25,7 +26,9 @@ const client = generateClient({
 
 
 export default function Login() {
+  //querie calls
   const [userprofiles, setUserProfiles] = useState([]);
+  const [userBikes, setUserBikes] = useState([])
   const { signOut } = useAuthenticator((context) => [context.user]);
   //profile info inputs
   const [yearsRiding, setYearsRiding] = useState(0);
@@ -90,6 +93,30 @@ const handleSaveBike = (event) => {
     setUserProfiles(profiles);
   }
 
+  async function fetchUserBikes() {
+    try {
+    const bikesData = await API.graphql(graphqlOperation(listBikes));
+    console.log(bikesData);
+    setUserBikes(bikesData);
+    }
+    catch (err) {
+      console.error('Error fetching bikes', err);
+    }
+  };
+
+  const displayUserBikes = () => {
+    //we want to first fetch all the bikes 
+    fetchUserBikes();
+    return(
+    <View>
+      {userBikes.map((userBike) => (
+        <View>
+          </View>
+      ))}
+    </View>
+  )
+  }
+
   return (
     <Flex
       className="App"
@@ -124,6 +151,8 @@ const handleSaveBike = (event) => {
           >
             <View>
               <Heading level="3">{userprofile.email}</Heading>
+              {/* get the bikes listed and rdy to be added */}
+
             </View>
           </Flex>
         ))}
