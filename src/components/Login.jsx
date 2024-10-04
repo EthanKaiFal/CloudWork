@@ -8,13 +8,14 @@ import {
   Divider,
 } from "@aws-amplify/ui-react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { Amplify } from "aws-amplify";
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import "@aws-amplify/ui-react/styles.css";
 import { generateClient } from "aws-amplify/data";
 import outputs from "../../amplify_outputs.json";
 import { bikesByUserId } from "../graphql/queries";
 import {createBike} from "../graphql/mutations";
 import './Login.css';
+
 
 
 /**
