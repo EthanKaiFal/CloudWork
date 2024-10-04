@@ -6,7 +6,7 @@ export const onCreateUserProfile = /* GraphQL */ `
     $filter: ModelSubscriptionUserProfileFilterInput
   ) {
     onCreateUserProfile(filter: $filter) {
-      userId
+      id
       userIdAMP
       riderLevel
       bikesOwned {
@@ -24,7 +24,7 @@ export const onUpdateUserProfile = /* GraphQL */ `
     $filter: ModelSubscriptionUserProfileFilterInput
   ) {
     onUpdateUserProfile(filter: $filter) {
-      userId
+      id
       userIdAMP
       riderLevel
       bikesOwned {
@@ -42,7 +42,7 @@ export const onDeleteUserProfile = /* GraphQL */ `
     $filter: ModelSubscriptionUserProfileFilterInput
   ) {
     onDeleteUserProfile(filter: $filter) {
-      userId
+      id
       userIdAMP
       riderLevel
       bikesOwned {
@@ -58,7 +58,7 @@ export const onDeleteUserProfile = /* GraphQL */ `
 export const onCreateBike = /* GraphQL */ `
   subscription OnCreateBike($filter: ModelSubscriptionBikeFilterInput) {
     onCreateBike(filter: $filter) {
-      bikeId
+      id
       bikeNumber
       brand
       model
@@ -69,7 +69,7 @@ export const onCreateBike = /* GraphQL */ `
       score
       userId
       owner {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt
@@ -85,7 +85,7 @@ export const onCreateBike = /* GraphQL */ `
 export const onUpdateBike = /* GraphQL */ `
   subscription OnUpdateBike($filter: ModelSubscriptionBikeFilterInput) {
     onUpdateBike(filter: $filter) {
-      bikeId
+      id
       bikeNumber
       brand
       model
@@ -96,7 +96,7 @@ export const onUpdateBike = /* GraphQL */ `
       score
       userId
       owner {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt
@@ -112,7 +112,7 @@ export const onUpdateBike = /* GraphQL */ `
 export const onDeleteBike = /* GraphQL */ `
   subscription OnDeleteBike($filter: ModelSubscriptionBikeFilterInput) {
     onDeleteBike(filter: $filter) {
-      bikeId
+      id
       bikeNumber
       brand
       model
@@ -123,7 +123,7 @@ export const onDeleteBike = /* GraphQL */ `
       score
       userId
       owner {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt

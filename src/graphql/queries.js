@@ -2,9 +2,9 @@
 // this is an auto generated file. This will be overwritten
 
 export const getUserProfile = /* GraphQL */ `
-  query GetUserProfile($userId: ID!) {
-    getUserProfile(userId: $userId) {
-      userId
+  query GetUserProfile($id: ID!) {
+    getUserProfile(id: $id) {
+      id
       userIdAMP
       riderLevel
       bikesOwned {
@@ -19,21 +19,21 @@ export const getUserProfile = /* GraphQL */ `
 `;
 export const listUserProfiles = /* GraphQL */ `
   query ListUserProfiles(
-    $userId: ID
+    $id: ID
     $filter: ModelUserProfileFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listUserProfiles(
-      userId: $userId
+      id: $id
       filter: $filter
       limit: $limit
       nextToken: $nextToken
       sortDirection: $sortDirection
     ) {
       items {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt
@@ -46,9 +46,9 @@ export const listUserProfiles = /* GraphQL */ `
   }
 `;
 export const getBike = /* GraphQL */ `
-  query GetBike($bikeId: ID!) {
-    getBike(bikeId: $bikeId) {
-      bikeId
+  query GetBike($id: ID!) {
+    getBike(id: $id) {
+      id
       bikeNumber
       brand
       model
@@ -59,7 +59,7 @@ export const getBike = /* GraphQL */ `
       score
       userId
       owner {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt
@@ -74,21 +74,21 @@ export const getBike = /* GraphQL */ `
 `;
 export const listBikes = /* GraphQL */ `
   query ListBikes(
-    $bikeId: ID
+    $id: ID
     $filter: ModelBikeFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listBikes(
-      bikeId: $bikeId
+      id: $id
       filter: $filter
       limit: $limit
       nextToken: $nextToken
       sortDirection: $sortDirection
     ) {
       items {
-        bikeId
+        id
         bikeNumber
         brand
         model
@@ -123,7 +123,7 @@ export const userByUserId = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt
@@ -151,7 +151,7 @@ export const bikesByUserId = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        bikeId
+        id
         bikeNumber
         brand
         model

@@ -1,22 +1,17 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-cloudwork-dev-33f47-authRole",
-      "UnauthRoleArn": "arn:aws:iam::010526249838:role/amplify-cloudwork-dev-33f47-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::010526249838:role/amplify-cloudwork-dev-33f47-authRole",
+      "AuthRoleName": "amplify-cloudwork-dev-625f9-authRole",
+      "UnauthRoleArn": "arn:aws:iam::010526249838:role/amplify-cloudwork-dev-625f9-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::010526249838:role/amplify-cloudwork-dev-625f9-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-cloudwork-dev-33f47-deployment",
-      "UnauthRoleName": "amplify-cloudwork-dev-33f47-unauthRole",
-      "StackName": "amplify-cloudwork-dev-33f47",
-      "StackId": "arn:aws:cloudformation:us-east-1:010526249838:stack/amplify-cloudwork-dev-33f47/22422a00-8082-11ef-acf6-0ef5ed42bf47",
-      "AmplifyAppId": "d3vp830nn1r6jj"
+      "DeploymentBucketName": "amplify-cloudwork-dev-625f9-deployment",
+      "UnauthRoleName": "amplify-cloudwork-dev-625f9-unauthRole",
+      "StackName": "amplify-cloudwork-dev-625f9",
+      "StackId": "arn:aws:cloudformation:us-east-1:010526249838:stack/amplify-cloudwork-dev-625f9/fc321a70-8219-11ef-b3a6-0affe9a64adb",
+      "AmplifyAppId": "d3ao0vrc5bac3j"
     },
     "categories": {
-      "auth": {
-        "cloudwork8423941784239417": {},
-        "cloudwork7f06f338": {},
-        "userPoolGroups": {}
-      },
       "api": {
         "cloudwork": {}
       }

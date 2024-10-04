@@ -7,7 +7,7 @@ export const createUserProfile = /* GraphQL */ `
     $condition: ModelUserProfileConditionInput
   ) {
     createUserProfile(input: $input, condition: $condition) {
-      userId
+      id
       userIdAMP
       riderLevel
       bikesOwned {
@@ -26,7 +26,7 @@ export const updateUserProfile = /* GraphQL */ `
     $condition: ModelUserProfileConditionInput
   ) {
     updateUserProfile(input: $input, condition: $condition) {
-      userId
+      id
       userIdAMP
       riderLevel
       bikesOwned {
@@ -45,7 +45,7 @@ export const deleteUserProfile = /* GraphQL */ `
     $condition: ModelUserProfileConditionInput
   ) {
     deleteUserProfile(input: $input, condition: $condition) {
-      userId
+      id
       userIdAMP
       riderLevel
       bikesOwned {
@@ -64,7 +64,7 @@ export const createBike = /* GraphQL */ `
     $condition: ModelBikeConditionInput
   ) {
     createBike(input: $input, condition: $condition) {
-      bikeId
+      id
       bikeNumber
       brand
       model
@@ -75,7 +75,7 @@ export const createBike = /* GraphQL */ `
       score
       userId
       owner {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt
@@ -94,7 +94,7 @@ export const updateBike = /* GraphQL */ `
     $condition: ModelBikeConditionInput
   ) {
     updateBike(input: $input, condition: $condition) {
-      bikeId
+      id
       bikeNumber
       brand
       model
@@ -105,7 +105,7 @@ export const updateBike = /* GraphQL */ `
       score
       userId
       owner {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt
@@ -124,7 +124,7 @@ export const deleteBike = /* GraphQL */ `
     $condition: ModelBikeConditionInput
   ) {
     deleteBike(input: $input, condition: $condition) {
-      bikeId
+      id
       bikeNumber
       brand
       model
@@ -135,7 +135,7 @@ export const deleteBike = /* GraphQL */ `
       score
       userId
       owner {
-        userId
+        id
         userIdAMP
         riderLevel
         createdAt

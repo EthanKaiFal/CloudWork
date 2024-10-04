@@ -13,6 +13,7 @@ import "@aws-amplify/ui-react/styles.css";
 import { generateClient } from "aws-amplify/data";
 import outputs from "../../amplify_outputs.json";
 import { bikesByUserId } from "../graphql/queries";
+import {createBike} from "../graphql/mutations";
 import './Login.css';
 
 
@@ -33,6 +34,7 @@ export default function Login() {
   const { signOut } = useAuthenticator((conp) => [conp.user]);
   //profile info inputs
   const [yearsRiding, setYearsRiding] = useState(0);
+  const [bikeNumber, setBikeNumber] = useState(-1);
   const [bikeBrand, setBikeBrand] = useState('');
   const [bikeModel, setBikeModel] = useState('');
   const [bikeYear, setBikeYear] = useState('');
@@ -48,6 +50,10 @@ export default function Login() {
   const handleyearsRiding = (event) => {
     setYearsRiding(event.target.value);
   };
+  const handleBikeNumber = (event) => {
+    const value = parseInt(event.target.value, 10);
+    setBikeNumber(value);
+  }
   const handleBikeBrand = (event) => {
     setBikeBrand(event.target.value);
   };
@@ -95,15 +101,41 @@ const handleAddBike = () => {
 
 
 //save button handler after a bike is added
-const handleSaveBike = (event) => {
+const handleSaveBike = async (event) => {
   event.preventDefault();
-  alert('Bike Name: ${bikeName}');
+  alert('Bike Name: ${bikeBrand}');
+  alert('Bike Name: ${bikeModel}');
+  alert('Bike Name: ${bikeYear}');
   alert('Bike Sold: ${bikeSold}');
   alert('Bike Score: ${bikeScore}');
   alert('Bike Broken: ${bikeBroken}');
   alert('Bike Months Owned: ${monthsOwned}');
+  const myProfile = userprofiles[0];
+  const bikeData = {
+    bikeNumber: bikeNumber,
+    brand: bikeBrand,
+    model: bikeModel,
+    year: bikeYear,
+    sold: bikeSold,
+    broken: bikeBroken,
+    ownershipMonths: monthsOwned,
+    score: bikeScore,
+    userId: myProfile.id,
+  }
+  //push to backend
+  const success = await createNewBike(bikeData);
+  if(success){
+    setBikeBrand('');
+    setBikeBroken(false);
+    setBikeModel('');
+    setBikeNumber(-1);
+    setBikeScore(0.0);
+    setBikeSold(false);
+    setBikeYear('');
+    setMonthsOwned(0);
+    setaddingPage(false);
+  }
 
-  //push to backend after 
 }
 
 const handleRemove = (bikeId) => {
@@ -139,6 +171,17 @@ const handleRemove = (bikeId) => {
     }
   };
 
+  async function createNewBike(bikeData) {
+    try {
+      const result = await API.graphql(graphqlOperation(createBike, { input: bikeData }));
+      console.log('Bike created:', result.data.createBike);
+      return true
+    } catch (error) {
+      console.error('Error creating Bike:', error);
+      return false;
+    }
+  }
+
 
 
 //displaying html helper functions 
@@ -172,9 +215,18 @@ const handleRemove = (bikeId) => {
     return (
     <View>
       <View name="inputField">
+        <p>What number bike is this?</p>
+        <input 
+        type="number" 
+        value={bikeNumber} 
+        onChange={handleBikeNumber} 
+        placeholder="Type in your bike number" 
+      />
+      </View>
+      <View name="inputField">
         <p>Brand:</p>
         <input 
-        type="p" 
+        type="text" 
         value={bikeBrand} 
         onChange={handleBikeBrand} 
         placeholder="Type in your bike brand" 
@@ -183,7 +235,7 @@ const handleRemove = (bikeId) => {
       <View name="inputField">
         <p>Model:</p>
         <input 
-        type="p" 
+        type="text" 
         value={bikeModel} 
         onChange={handleBikeModel} 
         placeholder="Type in your bike model" 
@@ -192,7 +244,7 @@ const handleRemove = (bikeId) => {
       <View name="inputField">
         <p>Year:</p>
         <input 
-        type="p" 
+        type="text" 
         value={bikeYear} 
         onChange={handleBikeYear} 
         placeholder="Type in your bike year" 
