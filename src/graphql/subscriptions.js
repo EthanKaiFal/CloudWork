@@ -1,60 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateUserProfile = /* GraphQL */ `
-  subscription OnCreateUserProfile(
-    $filter: ModelSubscriptionUserProfileFilterInput
-  ) {
-    onCreateUserProfile(filter: $filter) {
-      id
-      userIdAMP
-      riderLevel
-      bikesOwned {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateUserProfile = /* GraphQL */ `
-  subscription OnUpdateUserProfile(
-    $filter: ModelSubscriptionUserProfileFilterInput
-  ) {
-    onUpdateUserProfile(filter: $filter) {
-      id
-      userIdAMP
-      riderLevel
-      bikesOwned {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteUserProfile = /* GraphQL */ `
-  subscription OnDeleteUserProfile(
-    $filter: ModelSubscriptionUserProfileFilterInput
-  ) {
-    onDeleteUserProfile(filter: $filter) {
-      id
-      userIdAMP
-      riderLevel
-      bikesOwned {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const onCreateBike = /* GraphQL */ `
   subscription OnCreateBike($filter: ModelSubscriptionBikeFilterInput) {
     onCreateBike(filter: $filter) {
@@ -128,6 +74,60 @@ export const onDeleteBike = /* GraphQL */ `
         riderLevel
         createdAt
         updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onCreateUserProfile = /* GraphQL */ `
+  subscription OnCreateUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onCreateUserProfile(filter: $filter) {
+      id
+      userIdAMP
+      riderLevel
+      bikesOwned {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateUserProfile = /* GraphQL */ `
+  subscription OnUpdateUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onUpdateUserProfile(filter: $filter) {
+      id
+      userIdAMP
+      riderLevel
+      bikesOwned {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteUserProfile = /* GraphQL */ `
+  subscription OnDeleteUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onDeleteUserProfile(filter: $filter) {
+      id
+      userIdAMP
+      riderLevel
+      bikesOwned {
+        nextToken
         __typename
       }
       createdAt

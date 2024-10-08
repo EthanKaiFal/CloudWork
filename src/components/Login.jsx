@@ -8,13 +8,15 @@ import {
   Divider,
 } from "@aws-amplify/ui-react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 import "@aws-amplify/ui-react/styles.css";
 import { generateClient } from "aws-amplify/data";
 import outputs from "../../amplify_outputs.json";
 import { bikesByUserId } from "../graphql/queries";
 import {createBike} from "../graphql/mutations";
 import './Login.css';
+import {Bike} from '../models/index.js';
+import {DataStore} from '@aws-amplify/datastore';
 
 
 
@@ -38,7 +40,7 @@ export default function Login() {
   const [bikeNumber, setBikeNumber] = useState(-1);
   const [bikeBrand, setBikeBrand] = useState('');
   const [bikeModel, setBikeModel] = useState('');
-  const [bikeYear, setBikeYear] = useState('');
+  const [bikeYear, setBikeYear] = useState(0);
   const [bikeSold, setBikeSold] = useState(false);
   const [bikeScore, setBikeScore] = useState(0.0);
   const [bikeBroken, setBikeBroken] = useState(false);
@@ -62,10 +64,11 @@ export default function Login() {
     setBikeModel(event.target.value);
   };
   const handleBikeYear = (event) => {
-    setBikeYear(event.target.value);
+    const value = parseInt(event.target.value);
+    setBikeYear(value);
   };
   const handleBikeSold = (event) => {
-    if(event.target.value.equals("Yes")){
+    if(event.target.value === "Yes"){
     setBikeSold(true);
     }
     else{
@@ -77,7 +80,7 @@ export default function Login() {
     setBikeScore(value);
   };
   const handleBikeBroken = (event) => {
-    if(event.target.value.equals("Yes")){
+    if(event.target.value === "Yes"){
     setBikeBroken(true);
     }
     else{
@@ -104,13 +107,6 @@ const handleAddBike = () => {
 //save button handler after a bike is added
 const handleSaveBike = async (event) => {
   event.preventDefault();
-  alert('Bike Name: ${bikeBrand}');
-  alert('Bike Name: ${bikeModel}');
-  alert('Bike Name: ${bikeYear}');
-  alert('Bike Sold: ${bikeSold}');
-  alert('Bike Score: ${bikeScore}');
-  alert('Bike Broken: ${bikeBroken}');
-  alert('Bike Months Owned: ${monthsOwned}');
   const myProfile = userprofiles[0];
   const bikeData = {
     bikeNumber: bikeNumber,
@@ -143,16 +139,15 @@ const handleRemove = (bikeId) => {
   //do a call her that will remove the bike from the list of bikes owned by the owner
 }
 
-
+syncDataStore();
 
 //queries to the db
   useEffect(() => {
+    //syncDataStore();
     fetchUserProfile();
-  }, []);
-
-  useEffect(() => {
     fetchUserBikes();
   }, []);
+
 
   async function fetchUserProfile() {
     const { data: profiles } = await client.models.UserProfile.list();
@@ -161,10 +156,11 @@ const handleRemove = (bikeId) => {
 
   async function fetchUserBikes() {
     try {
-    const bikesData = await API.graphql(graphqlOperation(bikesByUserId));
+      //console.log(client.models);
+    const bikesData = await DataStore.query(Bike);
     console.log(bikesData);
     //sort by the bike number ascending so that we get the order in which owned
-    const sortedBikes = bikesData.sort((a, b) => a.bikeNumber = b.bikenumber);
+    const sortedBikes = bikesData.sort((a, b) => a.bikeNumber - b.bikenumber);
     setUserBikes(sortedBikes);
     }
     catch (err) {
@@ -174,12 +170,22 @@ const handleRemove = (bikeId) => {
 
   async function createNewBike(bikeData) {
     try {
-      const result = await API.graphql(graphqlOperation(createBike, { input: bikeData }));
-      console.log('Bike created:', result.data.createBike);
+      const newBike = await DataStore.save( new Bike(bikeData));
+      console.log('Bike created:', newBike);
       return true
     } catch (error) {
       console.error('Error creating Bike:', error);
       return false;
+    }
+  }
+
+  async function syncDataStore() {
+    try {
+      // Fetch and sync data from the cloud
+      await DataStore.start();
+      console.log('DataStore synced successfully.');
+    } catch (error) {
+      console.error('Error syncing DataStore:', error);
     }
   }
 
@@ -188,7 +194,6 @@ const handleRemove = (bikeId) => {
 //displaying html helper functions 
   const displayUserBikes = () => {
     //we want to first fetch all the bikes 
-    fetchUserBikes();
     return(
     <View>
       {userBikes.map((userBike) => (
