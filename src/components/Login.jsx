@@ -15,7 +15,7 @@ import outputs from "../../amplify_outputs.json";
 import { bikesByUserId } from "../graphql/queries";
 import {createBike} from "../graphql/mutations";
 import './Login.css';
-import {Bike} from '../models/index.js';
+import {Bike, UserProfile} from '../models/index.js';
 import {DataStore} from '@aws-amplify/datastore';
 
 
@@ -33,6 +33,7 @@ const client = generateClient({
 export default function Login() {
   //querie calls
   const [userprofiles, setUserProfiles] = useState([]);
+  const [localUserProfiles, setLocalUserProfiles] = useState([]);
   const [userBikes, setUserBikes] = useState([])
   const { signOut } = useAuthenticator((conp) => [conp.user]);
   //profile info inputs
@@ -107,7 +108,7 @@ const handleAddBike = () => {
 //save button handler after a bike is added
 const handleSaveBike = async (event) => {
   event.preventDefault();
-  const myProfile = userprofiles[0];
+  const myProfile = localUserProfiles[0];
   const bikeData = {
     bikeNumber: bikeNumber,
     brand: bikeBrand,
@@ -145,20 +146,54 @@ syncDataStore();
   useEffect(() => {
     //syncDataStore();
     fetchUserProfile();
+    //saveUserProfileToDS();
     fetchUserBikes();
   }, []);
 
 
   async function fetchUserProfile() {
+    try{
     const { data: profiles } = await client.models.UserProfile.list();
     setUserProfiles(profiles);
+    console.log("profiles"+ JSON.stringify(profiles));
+    //now check if it exists in the local UserProfile table 
+    const localProfiles = await DataStore.query(UserProfile, c => c.userIdAMP.eq(profiles[0].id));
+    if (localProfiles.length === 0) {
+      // No profile found, create a new one
+      console.log("No profile found for user, creating new profile...");
+      setLocalUserProfiles([await createNewUserProfile(profiles[0].id, profiles[0].email )]);
+    } else {
+      console.log("User profile found:", profiles);
+      // Set profile data in state or handle it
+      setLocalUserProfiles(profiles);
+    }
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
   }
+  }
+
+  // Function to create a new UserProfile in DynamoDB
+async function createNewUserProfile(userIdAMPS, email) {
+  try {
+    const newUserProfile = await DataStore.save(
+      new UserProfile({
+        userIdAMP: userIdAMPS,
+        bikesOwned: [],
+        // Add other fields as necessary based on your model
+      })
+    );
+    console.log("New UserProfile created:", newUserProfile);
+    return newUserProfile;
+  } catch (error) {
+    console.error("Error creating new user profile:", error);
+  }
+}
 
   async function fetchUserBikes() {
     try {
       //console.log(client.models);
     const bikesData = await DataStore.query(Bike);
-    console.log(bikesData);
+    console.log("BikeData"+JSON.stringify(bikesData));
     //sort by the bike number ascending so that we get the order in which owned
     const sortedBikes = bikesData.sort((a, b) => a.bikeNumber - b.bikenumber);
     setUserBikes(sortedBikes);
@@ -186,6 +221,42 @@ syncDataStore();
       console.log('DataStore synced successfully.');
     } catch (error) {
       console.error('Error syncing DataStore:', error);
+    }
+  }
+
+  async function saveUserProfileToDS() {
+    console.log("User Profile Data:"+ userprofiles);
+    if (!userprofiles || !Array.isArray(userprofiles) || userprofiles.length === 0) {
+      console.error("No user profiles found or userprofiles is not an array.");
+      return;
+    }
+    try {
+      // Use Promise.all to handle the array of promises returned by map
+      const savedProfiles = await Promise.all(
+        userprofiles.map(async (userProfileData) => {
+          try {
+            console.log("UserProfile Data2:", JSON.stringify(userProfileData, null, 2));
+
+            const savedProfile = await DataStore.save(
+              new UserProfile({
+                id: userProfileData.id,
+                userIdAMP: userProfileData.userIdAMP,
+                bikesOwned: userProfileData.bikesOwned,
+                // Add other fields as necessary based on your model
+              })
+            );
+            console.log("UserProfile saved to DataStore:", savedProfile);
+            return savedProfile;
+          } catch (error) {
+            console.error("Error saving to DataStore:", error);
+          }
+        })
+      );
+      
+      // Optionally return or log the saved profiles
+      return savedProfiles;
+    } catch (error) {
+      console.error("Error saving profiles to DataStore:", error);
     }
   }
 
