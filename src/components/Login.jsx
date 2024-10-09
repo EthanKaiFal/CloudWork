@@ -48,7 +48,7 @@ export default function Login() {
   const [monthsOwned, setMonthsOwned] = useState(0);
   //frontend status variable 
   const [addingNewBike, setaddingPage] = useState(false);
-
+  const [update, setUpdatePage] = useState(false);
 
   //inputChangeHandlers
   const handleyearsRiding = (event) => {
@@ -132,12 +132,15 @@ const handleSaveBike = async (event) => {
     setBikeYear('');
     setMonthsOwned(0);
     setaddingPage(false);
+    setUpdatePage(!update);
   }
 
 }
 
-const handleRemove = (bikeId) => {
+async function handleRemove(bike){
   //do a call her that will remove the bike from the list of bikes owned by the owner
+  await DataStore.delete(bike);
+  setUpdatePage(!update);
 }
 
 syncDataStore();
@@ -148,7 +151,7 @@ syncDataStore();
     fetchUserProfile();
     //saveUserProfileToDS();
     fetchUserBikes();
-  }, []);
+  }, [update]);
 
 
   async function fetchUserProfile() {
@@ -165,7 +168,7 @@ syncDataStore();
     } else {
       console.log("User profile found:", profiles);
       // Set profile data in state or handle it
-      setLocalUserProfiles(profiles);
+      setLocalUserProfiles(localProfiles);
     }
   } catch (error) {
     console.error("Error fetching user profile:", error);
@@ -279,7 +282,7 @@ async function createNewUserProfile(userIdAMPS, email) {
             <p name="bikeDisplayLine">Months Owned: {userBike.ownershipMonths}</p>
             <p name="bikeDisplayLine">Bike Score: {userBike.score}</p>
           </View>
-          <Button onClick={() =>handleRemove(userBike.bikeId)}> Remove </Button>
+          <Button onClick={() =>handleRemove(userBike)}> Remove </Button>
         </View>
       ))}
     </View>
@@ -329,7 +332,7 @@ async function createNewUserProfile(userIdAMPS, email) {
       </View>   
       <View name="inputField">
         <p>Is this bike already sold?</p>
-        <select value={bikeSold} onChange={handleBikeSold}>
+        <select value={bikeSold ? "Yes": "No"} onChange={handleBikeSold}>
           <option value="">Select...</option>{/*Placeholder*/}
           <option value="Yes">Yes</option>
           <option value="No">No</option>
@@ -337,7 +340,7 @@ async function createNewUserProfile(userIdAMPS, email) {
       </View>
       <View name="inputField">
         <p>Has this bike been significantly broken before?</p>
-        <select value={bikeBroken} onChange={handleBikeBroken}>
+        <select value={bikeBroken ? "Yes": "No"} onChange={handleBikeBroken}>
           <option value="">Select...</option>{/*Placeholder*/}
           <option value="Yes">Yes</option>
           <option value="No">No</option>
