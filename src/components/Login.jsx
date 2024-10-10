@@ -112,6 +112,7 @@ async function handleRemove(bike){
 const handleSaveBike = async (event) => {
   event.preventDefault();
   const myProfile = localUserProfiles[0];
+  console.log("localProf"+ JSON.stringify(myProfile));
   const bikeData = {
     bikeNumber: bikeNumber,
     brand: bikeBrand,
@@ -128,7 +129,7 @@ const handleSaveBike = async (event) => {
   if(success){
    restoreBikeSettingDefaults();
    //need to now update the stats
-   DBWork.updateBikeStats(bikeData);
+   DBWork.updateAllBikeStats(bikeData);
   }
 
 }
@@ -154,7 +155,7 @@ DBWork.syncDataStore();
     //syncDataStore();
     DBWork.fetchUserProfile(setUserProfiles,setLocalUserProfiles, client);
     //saveUserProfileToDS();
-    DBWork.fetchUserBikes(setUserBikes, userprofiles[0]);
+    DBWork.fetchUserBikes(setUserBikes, localUserProfiles);
   }, [update]);
 
 
