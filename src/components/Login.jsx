@@ -128,7 +128,7 @@ const handleSaveBike = async (event) => {
   if(success){
    restoreBikeSettingDefaults();
    //need to now update the stats
-   DBWork.updateBikeStats();
+   DBWork.updateBikeStats(bikeData);
   }
 
 }
@@ -154,7 +154,7 @@ DBWork.syncDataStore();
     //syncDataStore();
     DBWork.fetchUserProfile(setUserProfiles,setLocalUserProfiles, client);
     //saveUserProfileToDS();
-    DBWork.fetchUserBikes(setUserBikes);
+    DBWork.fetchUserBikes(setUserBikes, userprofiles[0]);
   }, [update]);
 
 
