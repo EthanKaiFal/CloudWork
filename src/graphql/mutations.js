@@ -148,3 +148,177 @@ export const deleteUserProfile = /* GraphQL */ `
     }
   }
 `;
+export const createBrandStats = /* GraphQL */ `
+  mutation CreateBrandStats(
+    $input: CreateBrandStatsInput!
+    $condition: ModelBrandStatsConditionInput
+  ) {
+    createBrandStats(input: $input, condition: $condition) {
+      brandName
+      avgSatisScore
+      totalNumBikes
+      numFirstBike
+      numSecondBike
+      numThirdPlusBike
+      numBroken
+      numSold
+      avgOwnership
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateBrandStats = /* GraphQL */ `
+  mutation UpdateBrandStats(
+    $input: UpdateBrandStatsInput!
+    $condition: ModelBrandStatsConditionInput
+  ) {
+    updateBrandStats(input: $input, condition: $condition) {
+      brandName
+      avgSatisScore
+      totalNumBikes
+      numFirstBike
+      numSecondBike
+      numThirdPlusBike
+      numBroken
+      numSold
+      avgOwnership
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteBrandStats = /* GraphQL */ `
+  mutation DeleteBrandStats(
+    $input: DeleteBrandStatsInput!
+    $condition: ModelBrandStatsConditionInput
+  ) {
+    deleteBrandStats(input: $input, condition: $condition) {
+      brandName
+      avgSatisScore
+      totalNumBikes
+      numFirstBike
+      numSecondBike
+      numThirdPlusBike
+      numBroken
+      numSold
+      avgOwnership
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createMakeStats = /* GraphQL */ `
+  mutation CreateMakeStats(
+    $input: CreateMakeStatsInput!
+    $condition: ModelMakeStatsConditionInput
+  ) {
+    createMakeStats(input: $input, condition: $condition) {
+      modelName
+      avgSatisScore
+      totalNumBikes
+      numFirstBike
+      numSecondBike
+      numThirdPlusBike
+      numBroken
+      numSold
+      avgOwnership
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateMakeStats = /* GraphQL */ `
+  mutation UpdateMakeStats(
+    $input: UpdateMakeStatsInput!
+    $condition: ModelMakeStatsConditionInput
+  ) {
+    updateMakeStats(input: $input, condition: $condition) {
+      modelName
+      avgSatisScore
+      totalNumBikes
+      numFirstBike
+      numSecondBike
+      numThirdPlusBike
+      numBroken
+      numSold
+      avgOwnership
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteMakeStats = /* GraphQL */ `
+  mutation DeleteMakeStats(
+    $input: DeleteMakeStatsInput!
+    $condition: ModelMakeStatsConditionInput
+  ) {
+    deleteMakeStats(input: $input, condition: $condition) {
+      modelName
+      avgSatisScore
+      totalNumBikes
+      numFirstBike
+      numSecondBike
+      numThirdPlusBike
+      numBroken
+      numSold
+      avgOwnership
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createBikeStats = /* GraphQL */ `
+  mutation CreateBikeStats(
+    $input: CreateBikeStatsInput!
+    $condition: ModelBikeStatsConditionInput
+  ) {
+    createBikeStats(input: $input, condition: $condition) {
+      id
+      modelName
+      bikeYear
+      bikeNum
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateBikeStats = /* GraphQL */ `
+  mutation UpdateBikeStats(
+    $input: UpdateBikeStatsInput!
+    $condition: ModelBikeStatsConditionInput
+  ) {
+    updateBikeStats(input: $input, condition: $condition) {
+      id
+      modelName
+      bikeYear
+      bikeNum
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteBikeStats = /* GraphQL */ `
+  mutation DeleteBikeStats(
+    $input: DeleteBikeStatsInput!
+    $condition: ModelBikeStatsConditionInput
+  ) {
+    deleteBikeStats(input: $input, condition: $condition) {
+      id
+      modelName
+      bikeYear
+      bikeNum
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;

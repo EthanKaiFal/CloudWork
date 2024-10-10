@@ -107,6 +107,152 @@ export const listUserProfiles = /* GraphQL */ `
     }
   }
 `;
+export const getBrandStats = /* GraphQL */ `
+  query GetBrandStats($brandName: String!) {
+    getBrandStats(brandName: $brandName) {
+      brandName
+      avgSatisScore
+      totalNumBikes
+      numFirstBike
+      numSecondBike
+      numThirdPlusBike
+      numBroken
+      numSold
+      avgOwnership
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listBrandStats = /* GraphQL */ `
+  query ListBrandStats(
+    $brandName: String
+    $filter: ModelBrandStatsFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listBrandStats(
+      brandName: $brandName
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        brandName
+        avgSatisScore
+        totalNumBikes
+        numFirstBike
+        numSecondBike
+        numThirdPlusBike
+        numBroken
+        numSold
+        avgOwnership
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getMakeStats = /* GraphQL */ `
+  query GetMakeStats($modelName: String!) {
+    getMakeStats(modelName: $modelName) {
+      modelName
+      avgSatisScore
+      totalNumBikes
+      numFirstBike
+      numSecondBike
+      numThirdPlusBike
+      numBroken
+      numSold
+      avgOwnership
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listMakeStats = /* GraphQL */ `
+  query ListMakeStats(
+    $modelName: String
+    $filter: ModelMakeStatsFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listMakeStats(
+      modelName: $modelName
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        modelName
+        avgSatisScore
+        totalNumBikes
+        numFirstBike
+        numSecondBike
+        numThirdPlusBike
+        numBroken
+        numSold
+        avgOwnership
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getBikeStats = /* GraphQL */ `
+  query GetBikeStats($id: ID!) {
+    getBikeStats(id: $id) {
+      id
+      modelName
+      bikeYear
+      bikeNum
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listBikeStats = /* GraphQL */ `
+  query ListBikeStats(
+    $id: ID
+    $filter: ModelBikeStatsFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listBikeStats(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        modelName
+        bikeYear
+        bikeNum
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const bikesByUserId = /* GraphQL */ `
   query BikesByUserId(
     $userId: ID!

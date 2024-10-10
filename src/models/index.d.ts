@@ -1,4 +1,4 @@
-import { ModelInit, MutableModel, __modelMeta__, OptionallyManagedIdentifier } from "@aws-amplify/datastore";
+import { ModelInit, MutableModel, __modelMeta__, OptionallyManagedIdentifier, CustomIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
 
@@ -82,4 +82,120 @@ export declare type UserProfile = LazyLoading extends LazyLoadingDisabled ? Eage
 
 export declare const UserProfile: (new (init: ModelInit<UserProfile>) => UserProfile) & {
   copyOf(source: UserProfile, mutator: (draft: MutableModel<UserProfile>) => MutableModel<UserProfile> | void): UserProfile;
+}
+
+type EagerbrandStats = {
+  readonly [__modelMeta__]: {
+    identifier: CustomIdentifier<brandStats, 'brandName'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly brandName: string;
+  readonly avgSatisScore?: number | null;
+  readonly totalNumBikes?: number | null;
+  readonly numFirstBike?: number | null;
+  readonly numSecondBike?: number | null;
+  readonly numThirdPlusBike?: number | null;
+  readonly numBroken?: number | null;
+  readonly numSold?: number | null;
+  readonly avgOwnership?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazybrandStats = {
+  readonly [__modelMeta__]: {
+    identifier: CustomIdentifier<brandStats, 'brandName'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly brandName: string;
+  readonly avgSatisScore?: number | null;
+  readonly totalNumBikes?: number | null;
+  readonly numFirstBike?: number | null;
+  readonly numSecondBike?: number | null;
+  readonly numThirdPlusBike?: number | null;
+  readonly numBroken?: number | null;
+  readonly numSold?: number | null;
+  readonly avgOwnership?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type brandStats = LazyLoading extends LazyLoadingDisabled ? EagerbrandStats : LazybrandStats
+
+export declare const brandStats: (new (init: ModelInit<brandStats>) => brandStats) & {
+  copyOf(source: brandStats, mutator: (draft: MutableModel<brandStats>) => MutableModel<brandStats> | void): brandStats;
+}
+
+type EagermakeStats = {
+  readonly [__modelMeta__]: {
+    identifier: CustomIdentifier<makeStats, 'modelName'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly modelName: string;
+  readonly avgSatisScore?: number | null;
+  readonly totalNumBikes?: number | null;
+  readonly numFirstBike?: number | null;
+  readonly numSecondBike?: number | null;
+  readonly numThirdPlusBike?: number | null;
+  readonly numBroken?: number | null;
+  readonly numSold?: number | null;
+  readonly avgOwnership?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazymakeStats = {
+  readonly [__modelMeta__]: {
+    identifier: CustomIdentifier<makeStats, 'modelName'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly modelName: string;
+  readonly avgSatisScore?: number | null;
+  readonly totalNumBikes?: number | null;
+  readonly numFirstBike?: number | null;
+  readonly numSecondBike?: number | null;
+  readonly numThirdPlusBike?: number | null;
+  readonly numBroken?: number | null;
+  readonly numSold?: number | null;
+  readonly avgOwnership?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type makeStats = LazyLoading extends LazyLoadingDisabled ? EagermakeStats : LazymakeStats
+
+export declare const makeStats: (new (init: ModelInit<makeStats>) => makeStats) & {
+  copyOf(source: makeStats, mutator: (draft: MutableModel<makeStats>) => MutableModel<makeStats> | void): makeStats;
+}
+
+type EagerbikeStats = {
+  readonly [__modelMeta__]: {
+    identifier: OptionallyManagedIdentifier<bikeStats, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly modelName: string;
+  readonly bikeYear: number;
+  readonly bikeNum?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazybikeStats = {
+  readonly [__modelMeta__]: {
+    identifier: OptionallyManagedIdentifier<bikeStats, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly modelName: string;
+  readonly bikeYear: number;
+  readonly bikeNum?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type bikeStats = LazyLoading extends LazyLoadingDisabled ? EagerbikeStats : LazybikeStats
+
+export declare const bikeStats: (new (init: ModelInit<bikeStats>) => bikeStats) & {
+  copyOf(source: bikeStats, mutator: (draft: MutableModel<bikeStats>) => MutableModel<bikeStats> | void): bikeStats;
 }

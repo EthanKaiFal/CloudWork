@@ -22,3 +22,34 @@ type UserProfile @model {
   riderLevel: String
   bikesOwned: [Bike] @hasMany(indexName: "byUserProfile", fields: ["id"])
 }
+
+type brandStats @model {
+  brandName: String! @primaryKey
+  avgSatisScore: Int
+  totalNumBikes: Int
+  numFirstBike: Int
+  numSecondBike: Int
+  numThirdPlusBike: Int
+  numBroken: Int
+  numSold: Int
+  avgOwnership: Int
+}
+
+type makeStats @model {
+  modelName: String! @primaryKey
+  avgSatisScore: Int
+  totalNumBikes: Int
+  numFirstBike: Int
+  numSecondBike: Int
+  numThirdPlusBike: Int
+  numBroken: Int
+  numSold: Int
+  avgOwnership: Int
+}
+
+type bikeStats @model {
+  id: ID! @primaryKey
+  modelName: String!
+  bikeYear: Int!
+  bikeNum: Int
+}

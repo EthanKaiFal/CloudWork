@@ -12,11 +12,9 @@ import { Amplify } from 'aws-amplify';
 import "@aws-amplify/ui-react/styles.css";
 import { generateClient } from "aws-amplify/data";
 import outputs from "../../amplify_outputs.json";
-import { bikesByUserId } from "../graphql/queries";
-import {createBike} from "../graphql/mutations";
 import './Login.css';
-import {Bike, UserProfile} from '../models/index.js';
 import {DataStore} from '@aws-amplify/datastore';
+import * as DBWork from './DBWork'
 
 
 
@@ -102,6 +100,11 @@ const handleAddBike = () => {
   setaddingPage(true);
 }
 
+async function handleRemove(bike){
+  //do a call her that will remove the bike from the list of bikes owned by the owner
+  await DataStore.delete(bike);
+  setUpdatePage(!update);
+}
 
 
 
@@ -121,9 +124,17 @@ const handleSaveBike = async (event) => {
     userId: myProfile.id,
   }
   //push to backend
-  const success = await createNewBike(bikeData);
+  const success = await DBWork.createNewBike(bikeData);
   if(success){
-    setBikeBrand('');
+   restoreBikeSettingDefaults();
+   //need to now update the stats
+   DBWork.updateBikeStats();
+  }
+
+}
+
+const restoreBikeSettingDefaults = () => {
+  setBikeBrand('');
     setBikeBroken(false);
     setBikeModel('');
     setBikeNumber(-1);
@@ -133,135 +144,19 @@ const handleSaveBike = async (event) => {
     setMonthsOwned(0);
     setaddingPage(false);
     setUpdatePage(!update);
-  }
-
 }
 
-async function handleRemove(bike){
-  //do a call her that will remove the bike from the list of bikes owned by the owner
-  await DataStore.delete(bike);
-  setUpdatePage(!update);
-}
 
-syncDataStore();
+DBWork.syncDataStore();
 
 //queries to the db
   useEffect(() => {
     //syncDataStore();
-    fetchUserProfile();
+    DBWork.fetchUserProfile(setUserProfiles,setLocalUserProfiles, client);
     //saveUserProfileToDS();
-    fetchUserBikes();
+    DBWork.fetchUserBikes(setUserBikes);
   }, [update]);
 
-
-  async function fetchUserProfile() {
-    try{
-    const { data: profiles } = await client.models.UserProfile.list();
-    setUserProfiles(profiles);
-    console.log("profiles"+ JSON.stringify(profiles));
-    //now check if it exists in the local UserProfile table 
-    const localProfiles = await DataStore.query(UserProfile, c => c.userIdAMP.eq(profiles[0].id));
-    if (localProfiles.length === 0) {
-      // No profile found, create a new one
-      console.log("No profile found for user, creating new profile...");
-      setLocalUserProfiles([await createNewUserProfile(profiles[0].id, profiles[0].email )]);
-    } else {
-      console.log("User profile found:", profiles);
-      // Set profile data in state or handle it
-      setLocalUserProfiles(localProfiles);
-    }
-  } catch (error) {
-    console.error("Error fetching user profile:", error);
-  }
-  }
-
-  // Function to create a new UserProfile in DynamoDB
-async function createNewUserProfile(userIdAMPS, email) {
-  try {
-    const newUserProfile = await DataStore.save(
-      new UserProfile({
-        userIdAMP: userIdAMPS,
-        bikesOwned: [],
-        // Add other fields as necessary based on your model
-      })
-    );
-    console.log("New UserProfile created:", newUserProfile);
-    return newUserProfile;
-  } catch (error) {
-    console.error("Error creating new user profile:", error);
-  }
-}
-
-  async function fetchUserBikes() {
-    try {
-      //console.log(client.models);
-    const bikesData = await DataStore.query(Bike);
-    console.log("BikeData"+JSON.stringify(bikesData));
-    //sort by the bike number ascending so that we get the order in which owned
-    const sortedBikes = bikesData.sort((a, b) => a.bikeNumber - b.bikenumber);
-    setUserBikes(sortedBikes);
-    }
-    catch (err) {
-      console.error('Error fetching bikes', err);
-    }
-  };
-
-  async function createNewBike(bikeData) {
-    try {
-      const newBike = await DataStore.save( new Bike(bikeData));
-      console.log('Bike created:', newBike);
-      return true
-    } catch (error) {
-      console.error('Error creating Bike:', error);
-      return false;
-    }
-  }
-
-  async function syncDataStore() {
-    try {
-      // Fetch and sync data from the cloud
-      await DataStore.start();
-      console.log('DataStore synced successfully.');
-    } catch (error) {
-      console.error('Error syncing DataStore:', error);
-    }
-  }
-
-  async function saveUserProfileToDS() {
-    console.log("User Profile Data:"+ userprofiles);
-    if (!userprofiles || !Array.isArray(userprofiles) || userprofiles.length === 0) {
-      console.error("No user profiles found or userprofiles is not an array.");
-      return;
-    }
-    try {
-      // Use Promise.all to handle the array of promises returned by map
-      const savedProfiles = await Promise.all(
-        userprofiles.map(async (userProfileData) => {
-          try {
-            console.log("UserProfile Data2:", JSON.stringify(userProfileData, null, 2));
-
-            const savedProfile = await DataStore.save(
-              new UserProfile({
-                id: userProfileData.id,
-                userIdAMP: userProfileData.userIdAMP,
-                bikesOwned: userProfileData.bikesOwned,
-                // Add other fields as necessary based on your model
-              })
-            );
-            console.log("UserProfile saved to DataStore:", savedProfile);
-            return savedProfile;
-          } catch (error) {
-            console.error("Error saving to DataStore:", error);
-          }
-        })
-      );
-      
-      // Optionally return or log the saved profiles
-      return savedProfiles;
-    } catch (error) {
-      console.error("Error saving profiles to DataStore:", error);
-    }
-  }
 
 
 

@@ -18,9 +18,9 @@ export function NavBar() {
     <div>
     <nav>
       <ul className="flex flex-row justify-between">
-      <li className='border border-white p-2'><Link to="/">Trivia Thing</Link></li>
-      <li className='border border-white p-2'><Link to="/Leaderboard">Leaderboard</Link></li>
-      {name ? <li className="border border-white p-2"><Link to="/profile">{name}</Link></li> : <li className="border border-white p-2"><Link to="/login">Login</Link></li>}
+      <li className='border border-white p-2'><Link to="/Leaderboard">Quiz</Link></li>
+      <li className='border border-white p-2'><Link to="/Leaderboard">Bikes</Link></li>
+      {name ? <li className="border border-white p-2"><Link to="/">Profile</Link></li> : <li className="border border-white p-2"><Link to="/login">Login</Link></li>}
 
       </ul>
     </nav>
