@@ -15,6 +15,8 @@ import outputs from "../../amplify_outputs.json";
 import './Login.css';
 import {DataStore} from '@aws-amplify/datastore';
 import * as DBWork from './DBWork'
+import awsconfig from '../aws-exports';
+
 
 
 
@@ -155,7 +157,7 @@ DBWork.syncDataStore();
     //syncDataStore();
     DBWork.fetchUserProfile(setUserProfiles,setLocalUserProfiles, client);
     //saveUserProfileToDS();
-    DBWork.fetchUserBikes(setUserBikes, localUserProfiles);
+    DBWork.fetchUserBikes(setUserBikes, localUserProfiles, update, setUpdatePage);
   }, [update]);
 
 

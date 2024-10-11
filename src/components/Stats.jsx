@@ -1,4 +1,4 @@
-import { NavBar } from "./NavBar";
+import NavBar from "./NavBar";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import React from 'react';
 import { StyleSheet, ScrollView, Text, View } from 'react-native-web';

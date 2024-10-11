@@ -68,7 +68,9 @@
 
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import Stats from "./Stats"
+import Bikes from "./Bikes"
 import Login from "./Login"
+import NavBar from './NavBar';
 //import { Home } from './components/Home';
 //import { Register } from './components/registration';
 //import { Profile } from './components/Profile';
@@ -89,11 +91,11 @@ function App() {
   return (
 
       <div className="bg-zinc-800 flex-col mx-auto max-w-3xl">
-        <header>
-        </header>
+        <NavBar />
         <main className="px-4">
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/Bikes" element={<Bikes />} />
           <Route path="/Stats" element={<Stats />} />
           {/* <Route path="/login/:profileID" element={<Login />} /> */}
           {/* <Route path="/profile" element ={<Profile />} />

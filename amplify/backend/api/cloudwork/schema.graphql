@@ -3,6 +3,13 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
+type UserProfile @model {
+  id: ID! @primaryKey
+  userIdAMP: String! @index(name: "userIdIndex", queryField: "userByUserId")
+  riderLevel: String
+  bikesOwned: [Bike] @hasMany(indexName: "byUserProfile", fields: ["id"])
+}
+
 type Bike @model {
   id: ID! @primaryKey
   bikeNumber: Int!
@@ -15,12 +22,6 @@ type Bike @model {
   score: Int
   userId: ID! @index(name: "byUserProfile") # Foreign key linking the bike to a user
   owner: UserProfile @belongsTo(fields: ["userId"])
-}
-type UserProfile @model {
-  id: ID! @primaryKey
-  userIdAMP: String! @index(name: "userIdIndex", queryField: "userByUserId")
-  riderLevel: String
-  bikesOwned: [Bike] @hasMany(indexName: "byUserProfile", fields: ["id"])
 }
 
 type brandStats @model {

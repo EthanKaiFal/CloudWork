@@ -1,6 +1,88 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getUserProfile = /* GraphQL */ `
+  query GetUserProfile($id: ID!) {
+    getUserProfile(id: $id) {
+      id
+      userIdAMP
+      riderLevel
+      bikesOwned {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listUserProfiles = /* GraphQL */ `
+  query ListUserProfiles(
+    $id: ID
+    $filter: ModelUserProfileFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listUserProfiles(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        userIdAMP
+        riderLevel
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncUserProfiles = /* GraphQL */ `
+  query SyncUserProfiles(
+    $filter: ModelUserProfileFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUserProfiles(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userIdAMP
+        riderLevel
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
 export const getBike = /* GraphQL */ `
   query GetBike($id: ID!) {
     getBike(id: $id) {
@@ -20,10 +102,16 @@ export const getBike = /* GraphQL */ `
         riderLevel
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -56,53 +144,50 @@ export const listBikes = /* GraphQL */ `
         userId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
+      startedAt
       __typename
     }
   }
 `;
-export const getUserProfile = /* GraphQL */ `
-  query GetUserProfile($id: ID!) {
-    getUserProfile(id: $id) {
-      id
-      userIdAMP
-      riderLevel
-      bikesOwned {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listUserProfiles = /* GraphQL */ `
-  query ListUserProfiles(
-    $id: ID
-    $filter: ModelUserProfileFilterInput
+export const syncBikes = /* GraphQL */ `
+  query SyncBikes(
+    $filter: ModelBikeFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
+    $lastSync: AWSTimestamp
   ) {
-    listUserProfiles(
-      id: $id
+    syncBikes(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
-      sortDirection: $sortDirection
+      lastSync: $lastSync
     ) {
       items {
         id
-        userIdAMP
-        riderLevel
+        bikeNumber
+        brand
+        model
+        year
+        sold
+        broken
+        ownershipMonths
+        score
+        userId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
+      startedAt
       __typename
     }
   }
@@ -121,6 +206,9 @@ export const getBrandStats = /* GraphQL */ `
       avgOwnership
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -152,9 +240,49 @@ export const listBrandStats = /* GraphQL */ `
         avgOwnership
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncBrandStats = /* GraphQL */ `
+  query SyncBrandStats(
+    $filter: ModelBrandStatsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncBrandStats(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        brandName
+        avgSatisScore
+        totalNumBikes
+        numFirstBike
+        numSecondBike
+        numThirdPlusBike
+        numBroken
+        numSold
+        avgOwnership
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -173,6 +301,9 @@ export const getMakeStats = /* GraphQL */ `
       avgOwnership
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -204,9 +335,49 @@ export const listMakeStats = /* GraphQL */ `
         avgOwnership
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncMakeStats = /* GraphQL */ `
+  query SyncMakeStats(
+    $filter: ModelMakeStatsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncMakeStats(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        modelName
+        avgSatisScore
+        totalNumBikes
+        numFirstBike
+        numSecondBike
+        numThirdPlusBike
+        numBroken
+        numSold
+        avgOwnership
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -220,6 +391,9 @@ export const getBikeStats = /* GraphQL */ `
       bikeNum
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -246,9 +420,76 @@ export const listBikeStats = /* GraphQL */ `
         bikeNum
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncBikeStats = /* GraphQL */ `
+  query SyncBikeStats(
+    $filter: ModelBikeStatsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncBikeStats(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        modelName
+        bikeYear
+        bikeNum
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const userByUserId = /* GraphQL */ `
+  query UserByUserId(
+    $userIdAMP: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserProfileFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userByUserId(
+      userIdAMP: $userIdAMP
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userIdAMP
+        riderLevel
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -281,37 +522,13 @@ export const bikesByUserId = /* GraphQL */ `
         userId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
-      __typename
-    }
-  }
-`;
-export const userByUserId = /* GraphQL */ `
-  query UserByUserId(
-    $userIdAMP: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserProfileFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    userByUserId(
-      userIdAMP: $userIdAMP
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        userIdAMP
-        riderLevel
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
+      startedAt
       __typename
     }
   }

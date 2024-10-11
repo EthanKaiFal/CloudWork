@@ -1,5 +1,89 @@
 export const schema = {
     "models": {
+        "UserProfile": {
+            "name": "UserProfile",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userIdAMP": {
+                    "name": "userIdAMP",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "riderLevel": {
+                    "name": "riderLevel",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "bikesOwned": {
+                    "name": "bikesOwned",
+                    "isArray": true,
+                    "type": {
+                        "model": "Bike"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "owner"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserProfiles",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "fields": [
+                            "id"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "userIdIndex",
+                        "queryField": "userByUserId",
+                        "fields": [
+                            "userIdAMP"
+                        ]
+                    }
+                }
+            ]
+        },
         "Bike": {
             "name": "Bike",
             "fields": {
@@ -126,90 +210,6 @@ export const schema = {
                         "name": "byUserProfile",
                         "fields": [
                             "userId"
-                        ]
-                    }
-                }
-            ]
-        },
-        "UserProfile": {
-            "name": "UserProfile",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "userIdAMP": {
-                    "name": "userIdAMP",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "riderLevel": {
-                    "name": "riderLevel",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "bikesOwned": {
-                    "name": "bikesOwned",
-                    "isArray": true,
-                    "type": {
-                        "model": "Bike"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "owner"
-                        ]
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "UserProfiles",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "fields": [
-                            "id"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "userIdIndex",
-                        "queryField": "userByUserId",
-                        "fields": [
-                            "userIdAMP"
                         ]
                     }
                 }

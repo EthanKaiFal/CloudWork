@@ -4,6 +4,7 @@ import {DataStore} from '@aws-amplify/datastore';
 export async function fetchUserProfile(setUserProfiles, setLocalUserProfiles, client) {
     try{
     const { data: profiles } = await client.models.UserProfile.list();
+    //const user = await Auth.currentAuthenticatedUser();
     setUserProfiles(profiles);
     //console.log("profiles"+ JSON.stringify(profiles));
     //now check if it exists in the local UserProfile table 
@@ -13,7 +14,7 @@ export async function fetchUserProfile(setUserProfiles, setLocalUserProfiles, cl
       //console.log("No profile found for user, creating new profile...");
       setLocalUserProfiles([await createNewUserProfile(profiles[0].id)]);
     } else {
-      //console.log("User profile found:", profiles);
+      console.log("User profile found:", profiles);
       // Set profile data in state or handle it
       setLocalUserProfiles(localProfiles);
     }
@@ -38,19 +39,34 @@ export async function fetchUserProfile(setUserProfiles, setLocalUserProfiles, cl
     }
   }
 
-  export async function fetchUserBikes(setUserBikes, userprofiles) {
+  export async function fetchBikeModels(setBikeModels ) {
+    try {
+      //console.log(client.models);
+    const bikesData = await DataStore.query(makeStats);
+    //console.log("bike Models:"+ JSON.stringify(bikesData));
+    setBikeModels(bikesData);
+    }
+    catch (err) {
+      console.error('Error fetching bikes', err);
+    }
+  }
+
+  export async function fetchUserBikes(setUserBikes, userprofiles, update, setUpdatePage) {
     let user;
     if(userprofiles.length===0){
+      console.log("here");
+      setUpdatePage(!update);
       return;
     }
     else{
+      console.log("or here");
       user=userprofiles[0];
     try {
       //console.log(client.models);
     const bikesData = await DataStore.query(Bike, b => b.userId.eq(user.id));
     //console.log("BikeData"+JSON.stringify(bikesData));
     //sort by the bike number ascending so that we get the order in which owned
-    const sortedBikes = bikesData.sort((a, b) => a.bikeNumber - b.bikenumber);
+    const sortedBikes = bikesData.sort((a, b) => a.bikeNumber - b.bikeNumber);
     setUserBikes(sortedBikes);
     }
     catch (err) {

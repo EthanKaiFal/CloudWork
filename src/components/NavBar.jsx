@@ -1,29 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Navbar.css'; // Import CSS for styling
 
-export function NavBar() {
-  const accessToken = localStorage.getItem('accessToken');
-  const user = localStorage.getItem('username');
-  const [name, setName] = useState( null); // Initialize userData as null
-    console.log(accessToken)
-          useEffect(() => {
-           if(accessToken){
-              console.log(user)
-              setName(user)
-
-           }
-
-          })
+export default function NavBar(){
   return (
-    <div>
-    <nav>
-      <ul className="flex flex-row justify-between">
-      <li className='border border-white p-2'><Link to="/Leaderboard">Quiz</Link></li>
-      <li className='border border-white p-2'><Link to="/Leaderboard">Bikes</Link></li>
-      {name ? <li className="border border-white p-2"><Link to="/">Profile</Link></li> : <li className="border border-white p-2"><Link to="/login">Login</Link></li>}
-
-      </ul>
+    <nav className="navbar">
+      <div className="container">
+        <h1 className="logo">Bike Akinator</h1>
+        <ul className="nav-list">
+          <li className="nav-item">
+            <Link to="/" className="nav-link">Quiz</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/Bikes" className="nav-link">Bikes</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/" className="nav-link">Profile</Link>
+          </li>
+        </ul>
+      </div>
     </nav>
-    </div>
   );
-}
+};

@@ -1,6 +1,72 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUserProfile = /* GraphQL */ `
+  subscription OnCreateUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onCreateUserProfile(filter: $filter) {
+      id
+      userIdAMP
+      riderLevel
+      bikesOwned {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateUserProfile = /* GraphQL */ `
+  subscription OnUpdateUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onUpdateUserProfile(filter: $filter) {
+      id
+      userIdAMP
+      riderLevel
+      bikesOwned {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteUserProfile = /* GraphQL */ `
+  subscription OnDeleteUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onDeleteUserProfile(filter: $filter) {
+      id
+      userIdAMP
+      riderLevel
+      bikesOwned {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
 export const onCreateBike = /* GraphQL */ `
   subscription OnCreateBike($filter: ModelSubscriptionBikeFilterInput) {
     onCreateBike(filter: $filter) {
@@ -20,10 +86,16 @@ export const onCreateBike = /* GraphQL */ `
         riderLevel
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -47,10 +119,16 @@ export const onUpdateBike = /* GraphQL */ `
         riderLevel
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -74,64 +152,16 @@ export const onDeleteBike = /* GraphQL */ `
         riderLevel
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       createdAt
       updatedAt
-      __typename
-    }
-  }
-`;
-export const onCreateUserProfile = /* GraphQL */ `
-  subscription OnCreateUserProfile(
-    $filter: ModelSubscriptionUserProfileFilterInput
-  ) {
-    onCreateUserProfile(filter: $filter) {
-      id
-      userIdAMP
-      riderLevel
-      bikesOwned {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateUserProfile = /* GraphQL */ `
-  subscription OnUpdateUserProfile(
-    $filter: ModelSubscriptionUserProfileFilterInput
-  ) {
-    onUpdateUserProfile(filter: $filter) {
-      id
-      userIdAMP
-      riderLevel
-      bikesOwned {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteUserProfile = /* GraphQL */ `
-  subscription OnDeleteUserProfile(
-    $filter: ModelSubscriptionUserProfileFilterInput
-  ) {
-    onDeleteUserProfile(filter: $filter) {
-      id
-      userIdAMP
-      riderLevel
-      bikesOwned {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -152,6 +182,9 @@ export const onCreateBrandStats = /* GraphQL */ `
       avgOwnership
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -172,6 +205,9 @@ export const onUpdateBrandStats = /* GraphQL */ `
       avgOwnership
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -192,6 +228,9 @@ export const onDeleteBrandStats = /* GraphQL */ `
       avgOwnership
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -212,6 +251,9 @@ export const onCreateMakeStats = /* GraphQL */ `
       avgOwnership
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -232,6 +274,9 @@ export const onUpdateMakeStats = /* GraphQL */ `
       avgOwnership
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -252,6 +297,9 @@ export const onDeleteMakeStats = /* GraphQL */ `
       avgOwnership
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -267,6 +315,9 @@ export const onCreateBikeStats = /* GraphQL */ `
       bikeNum
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -282,6 +333,9 @@ export const onUpdateBikeStats = /* GraphQL */ `
       bikeNum
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -297,6 +351,9 @@ export const onDeleteBikeStats = /* GraphQL */ `
       bikeNum
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }

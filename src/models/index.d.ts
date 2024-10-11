@@ -1,10 +1,42 @@
 import { ModelInit, MutableModel, __modelMeta__, OptionallyManagedIdentifier, CustomIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
 
 
 
 
+
+type EagerUserProfile = {
+  readonly [__modelMeta__]: {
+    identifier: OptionallyManagedIdentifier<UserProfile, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userIdAMP: string;
+  readonly riderLevel?: string | null;
+  readonly bikesOwned?: (Bike | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyUserProfile = {
+  readonly [__modelMeta__]: {
+    identifier: OptionallyManagedIdentifier<UserProfile, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userIdAMP: string;
+  readonly riderLevel?: string | null;
+  readonly bikesOwned: AsyncCollection<Bike>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type UserProfile = LazyLoading extends LazyLoadingDisabled ? EagerUserProfile : LazyUserProfile
+
+export declare const UserProfile: (new (init: ModelInit<UserProfile>) => UserProfile) & {
+  copyOf(source: UserProfile, mutator: (draft: MutableModel<UserProfile>) => MutableModel<UserProfile> | void): UserProfile;
+}
 
 type EagerBike = {
   readonly [__modelMeta__]: {
@@ -50,38 +82,6 @@ export declare type Bike = LazyLoading extends LazyLoadingDisabled ? EagerBike :
 
 export declare const Bike: (new (init: ModelInit<Bike>) => Bike) & {
   copyOf(source: Bike, mutator: (draft: MutableModel<Bike>) => MutableModel<Bike> | void): Bike;
-}
-
-type EagerUserProfile = {
-  readonly [__modelMeta__]: {
-    identifier: OptionallyManagedIdentifier<UserProfile, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly userIdAMP: string;
-  readonly riderLevel?: string | null;
-  readonly bikesOwned?: (Bike | null)[] | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyUserProfile = {
-  readonly [__modelMeta__]: {
-    identifier: OptionallyManagedIdentifier<UserProfile, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly userIdAMP: string;
-  readonly riderLevel?: string | null;
-  readonly bikesOwned: AsyncCollection<Bike>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type UserProfile = LazyLoading extends LazyLoadingDisabled ? EagerUserProfile : LazyUserProfile
-
-export declare const UserProfile: (new (init: ModelInit<UserProfile>) => UserProfile) & {
-  copyOf(source: UserProfile, mutator: (draft: MutableModel<UserProfile>) => MutableModel<UserProfile> | void): UserProfile;
 }
 
 type EagerbrandStats = {
